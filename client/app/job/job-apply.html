@@ -1,0 +1,33 @@
+<div class="container">
+	<h1 class="header">Postuler	</h1>
+
+	<div class="alert alert-danger" ng-show="sent">Candidature envoyée</div>
+
+	<form name="applyForm" ng-submit="doApply()" novalidate>
+		<div class="form-group" >
+			<label class="full-width">
+				Name
+				<small class="form-error" ng-show="applyForm.name.$touched && applyForm.name.$invalid">Invalid email</small>
+				<input type="text" class="form-control" name="name" ng-model="apply.name" required>
+			</label>
+		</div>
+
+		<div class="form-group">
+			<label class="full-width">
+				Email
+				<small class="form-error" ng-show="applyForm.email.$touched && applyForm.email.$error.email">Invalid format</small>
+				<small class="form-error" ng-show="applyForm.email.$touched && applyForm.email.$error.required">Email required</small>
+				<input type="email" class="form-control"  name="email" ng-model="apply.email" required>
+			</label>
+		</div>
+
+		<div class="form-group">
+			<label class="full-width">
+				Message
+				<textarea class="form-control" rows="5" name="message" ng-model="apply.message" ></textarea>
+			</label>
+		</div>
+
+		<button type="submit" ng-disabled="applyForm.$invalid" class="btn btn-success">Envoyer</button>
+	</form>
+</div>
