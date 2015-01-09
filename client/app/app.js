@@ -1,35 +1,15 @@
-angular.module('app', []);
+angular.module('app', ['ngRoute']);
 
-/* @ngInject */
-function JobService($http) {
 
-    var baseUrl = '/api/jobs/';
+function RouteConfig ($routeProvider){
 
-    return {
-        list: listFn,
-        get: getFn
-    };
+	$routeProvider.when('/jobs', {
+		templateUrl : 'app/job/job-list.html',
+		controller : 'JobListCtrl'
+	});
 
-    ////////
-
-    function listFn() {
-        return $http.get(baseUrl);
-    }
-
-    function getFn(id) {
-        return $http.get(baseUrl + id);
-    }
 }
 
-angular.module('app').factory('Job', JobService);
+angular.module('app').config(RouteConfig);
 
-/* @ngInject */
-function JobListCtrl($scope, Job) {
 
-    Job.list()
-        .success(function(jobs) {
-            $scope.jobs = jobs;
-        });
-}
-
-angular.module('app').controller('JobListCtrl', JobListCtrl);

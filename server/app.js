@@ -1,26 +1,20 @@
 'use strict';
 
+var http = require('http');
 var express = require('express');
+var mongoose = require('mongoose');
+var config = require('./config/environment');
 
-var jobRoute = require('./api/job/job.route');
+mongoose.connect(config.mongo.url);
 
 var app = express();
 
-app.use ('/api/jobs', jobRoute);
 
-app.get('/sample', function (req, res){
-	res.send('Hello world');
-});
+var routesFn = require('./config/routes');
+routesFn(app);
 
-app.get('/:name', function (req, res){
+http.createServer (app).listen (config.port);
 
-	res.send('Hello '+req.param('name'));
-});
-
-
-
-app.listen(process.env.PORT || 9000);
-
-console.log('server is running');
+console.log('Server is running');
 
 module.exports = app;
