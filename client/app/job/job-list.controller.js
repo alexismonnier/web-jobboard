@@ -1,11 +1,7 @@
-
 /* @ngInject */
-function JobListCtrl($scope, Job) {
-
-    Job.list()
-        .success(function(jobs) {
-            $scope.jobs = jobs;
-        });
+function JobListCtrl($scope, jobList) {
+	console.log(jobList)
+    $scope.jobs = jobList;
 }
 
 angular.module('app').controller('JobListCtrl', JobListCtrl);
